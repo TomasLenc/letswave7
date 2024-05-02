@@ -1010,11 +1010,11 @@ GLW_view_OpeningFcn;
             set(handles.x2_edit,'String',x(2));
         end
         x_scale=x(2)-x(1);
-        if x_scale>2*10^4/userdata.Fs
-            set(handles.x1_edit, 'String',num2str(userdata.x1));
-            set(handles.x2_edit, 'String',num2str(userdata.x2));
-            return;
-        end
+%         if x_scale>2*10^4/userdata.Fs
+%             set(handles.x1_edit, 'String',num2str(userdata.x1));
+%             set(handles.x2_edit, 'String',num2str(userdata.x2));
+%             return;
+%         end
         userdata.x_range=x_scale;
         userdata.x1=x(1);
         userdata.x2=x(2);
@@ -1092,9 +1092,13 @@ GLW_view_OpeningFcn;
         if x_scale>userdata.t(end)-userdata.t(1)
             x_scale=userdata.t(end)-userdata.t(1);
         end
-        if x_scale>2*10^4/userdata.Fs
-            x_scale=2*10^4/userdata.Fs;
-        end
+        % This here limits the maxim x-scale range to be some fraction of
+        % the sampling rate. I don't care cause I have loads of RAM and
+        % it's annoying me that I can't set it to see the whole trial...
+        % there is few more spots where this needs to be commentted out
+%         if x_scale>2*10^4/userdata.Fs
+%             x_scale=2*10^4/userdata.Fs;
+%         end
         x(2)=x(1)+x_scale;
         if x(2)>userdata.t(end)
             x(2)=userdata.t(end);
@@ -1126,9 +1130,9 @@ GLW_view_OpeningFcn;
         if x_scale>userdata.t(end)-userdata.t(1)
             x_scale=userdata.t(end)-userdata.t(1);
         end
-        if x_scale>2*10^4/userdata.Fs
-            x_scale=2*10^4/userdata.Fs;
-        end
+%         if x_scale>2*10^4/userdata.Fs
+%             x_scale=2*10^4/userdata.Fs;
+%         end
         x(2)=x(1)+x_scale;
         if x(2)>userdata.t(end)
             x(2)=userdata.t(end);
